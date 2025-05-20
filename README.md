@@ -76,5 +76,26 @@ ___
 
 
 ___
+## 📂 Dataset
+
+
+___
+## ⚙️ Proses ETL
+
+
+___
+## 🔍 Analisis & ML
+
+
+___
+## 📊 Visualisasi
+
+
+___
+## 🧪 Pengujian
+
+
+___
+## 🚀 Deployment
 
 
