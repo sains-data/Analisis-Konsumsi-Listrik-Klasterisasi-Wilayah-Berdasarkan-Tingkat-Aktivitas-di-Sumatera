@@ -135,7 +135,44 @@ Data akan disimpan dalam format yang berbeda di setiap lapisan Medallion Archite
 
 ___
 ## ⚙️ Proses ETL
+## Proses ETL (Extract, Transform, Load)
 
+Proses ETL adalah tulang punggung dari pipeline data ini, memastikan data mengalir secara efisien dan transformatif dari sumber mentah hingga menjadi informasi yang siap untuk analitik. Proses ini dirancang untuk berjalan secara *batch processing* menggunakan Apache Spark sebagai *engine* utamanya.
+
+### 1. Extract (Bronze Layer)
+
+Tahap ini bertanggung jawab untuk pengambilan data dari berbagai sumber dan menyimpannya di lapisan Bronze (Raw Data) HDFS tanpa modifikasi.
+
+* **Aktivitas**: Mengambil data dari smart meter (simulasi), API BMKG (data cuaca), dan data demografi (BPS).
+* **Tools**: Bash scripting (`curl`) dan HDFS CLI untuk mengunggah data.
+* **Output**: Data mentah disimpan dalam format CSV atau JSON di HDFS pada path `/data/bronze/`. Contoh: `/data/bronze/konsumsi/2025-01.csv`.
+
+### 2. Transform (Silver Layer)
+
+Tahap ini fokus pada pembersihan, validasi, dan transformasi data untuk meningkatkan kualitas dan efisiensi.
+
+* **Aktivitas**:
+    * Validasi skema data.
+    * Pembersihan nilai `null` atau tidak valid.
+    * Penanganan duplikasi data.
+    * Parsing `datetime` ke format standar.
+    * Normalisasi kolom numerik (opsional).
+    * *Feature engineering* untuk membuat fitur baru yang relevan (misalnya agregasi harian, variasi waktu).
+    * Integrasi (join) antar-sumber data (smart meter, cuaca, demografi).
+* **Tools**: Apache Spark, Hive Metastore.
+* **Output**: Data bersih dan terstruktur disimpan dalam format Parquet di HDFS pada path `/data/silver/`. Contoh: `/data/silver/konsumsi/2025.parquet`.
+
+### 3. Load (Gold Layer)
+
+Tahap terakhir ini memuat data yang sudah siap analitik dan mengaplikasikan algoritma klasterisasi.
+
+* **Aktivitas**:
+    * Menghitung metrik agregat seperti total konsumsi per wilayah per hari.
+    * Menerapkan algoritma klasterisasi **K-Means** menggunakan Spark MLlib untuk mengelompokkan wilayah berdasarkan pola konsumsi listrik.
+    * Menyimpan hasil klasterisasi dan ringkasan agregat.
+    * Mendaftarkan data Gold Layer sebagai tabel di Apache Hive untuk memudahkan query dan akses visualisasi.
+* **Tools**: Spark MLlib, Spark SQL, HDFS, Apache Hive.
+* **Output**: Data hasil analisis akhir disimpan dalam format kolumnar efisien (Parquet/ORC) di HDFS pada path `/data/gold/`. Contoh: `/data/gold/klasterisasi/summary_cluster.parquet`. Model klasterisasi juga disimpan di `/models/kmeans_cluster/`.
 
 ___
 ## 🔍 Analisis & ML
