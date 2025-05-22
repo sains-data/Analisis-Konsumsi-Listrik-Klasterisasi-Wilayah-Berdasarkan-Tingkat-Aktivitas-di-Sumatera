@@ -80,10 +80,10 @@ Representasi dari organisasi data di dalam cluster Hadoop, mengikuti **Medallion
 
 | Layer                               | Path HDFS                           | Format               | Tujuan                                                                                     |
 | :---------------------------------- | :---------------------------------- | :------------------- | :----------------------------------------------------------------------------------------- |
-| **Bronze Layer** (Raw Data)         | `/data/bronze/` [cite: 82, 201, 320] | CSV, JSON [cite: 82, 201, 320]     | Arsip permanen data mentah dari sumber eksternal tanpa perubahan.                  |
-| **Silver Layer** (Cleaned Data)     | `/data/silver/` [cite: 82, 201, 320] | Parquet [cite: 82, 201, 320]    | Data terstruktur, bersih, dan efisien dalam penyimpanan, siap dianalisis.        |
-| **Gold Layer** (Analytics-Ready)    | `/data/gold/` [cite: 82, 201, 320]  | Parquet, ORC [cite: 65, 82, 184, 201, 320] | Untuk kebutuhan laporan, query cepat, dan visualisasi ke end-user. |
-| **Temp Layer** (Temporary files)    | `/data/tmp/` [cite: 82, 201, 320]   | (N/A)                | Digunakan untuk file sementara selama proses ETL.                    |
+| **Bronze Layer** (Raw Data)         | `/data/bronze/` | CSV, JSON     | Arsip permanen data mentah dari sumber eksternal tanpa perubahan.                  |
+| **Silver Layer** (Cleaned Data)     | `/data/silver/` | Parquet    | Data terstruktur, bersih, dan efisien dalam penyimpanan, siap dianalisis.        |
+| **Gold Layer** (Analytics-Ready)    | `/data/gold/`  | Parquet, ORC | Untuk kebutuhan laporan, query cepat, dan visualisasi ke end-user. |
+| **Temp Layer** (Temporary files)    | `/data/tmp/`   | (N/A)                | Digunakan untuk file sementara selama proses ETL.                    |
 
 ___
 ## 📂 Dataset
