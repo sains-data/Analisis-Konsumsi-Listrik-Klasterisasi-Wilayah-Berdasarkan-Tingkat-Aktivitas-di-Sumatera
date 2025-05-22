@@ -176,7 +176,50 @@ Tahap terakhir ini memuat data yang sudah siap analitik dan mengaplikasikan algo
 
 ___
 ## 🔍 Analisis & ML
+## Analisis & ML (Machine Learning)
 
+Setelah proses ETL selesai dan data tersedia di Gold Layer dalam bentuk agregasi per wilayah, tahap selanjutnya melakukan analitik lanjutan untuk menghasilkan wawasan yang berguna bagi pengambilan keputusan. Analitik dilakukan menggunakan Apache Spark MLlib, dengan fokus utama pada klasterisasi wilayah berdasarkan pola konsumsi listrik.
+
+### 1. Tujuan Analitik ML
+
+* Mengelompokkan wilayah di Pulau Sumatera berdasarkan karakteristik konsumsi listrik.
+* Menyusun segmentasi wilayah seperti "Aktivitas Tinggi," "Aktivitas Sedang," dan "Aktivitas Rendah."
+* Mendukung strategi distribusi energi berbasis data untuk pihak manajemen dan pengambil kebijakan.
+
+### 2. Data Input untuk MLlib
+
+Data yang digunakan sebagai input untuk model Machine Learning berasal dari Gold Layer yang sudah bersih dan teragregasi.
+
+* **Sumber**: Dataset dari Gold Layer.
+* **Format**: Parquet.
+* **Kolom (Fitur yang Digunakan)**:
+    * `region`
+    * `total_kwh`
+    * `temperature`
+    * `day_type` (weekday/weekend)
+    * `hour_slot` (pagi/siang/malam)
+
+### 3. Metodologi Analitik: Klasterisasi K-Means
+
+Dalam proyek ini, fokus utama analitik adalah **Segmentasi Wilayah** menggunakan algoritma **K-Means Clustering** dari Spark MLlib.
+
+| No  | Analisis          | Algoritma Spark MLlib | Tujuan                                                |
+| :-- | :---------------- | :-------------------- | :---------------------------------------------------- |
+| 2   | Segmentasi wilayah | KMeans Clustering     | Mengelompokkan wilayah berdasarkan kesamaan pola konsumsi listrik. |
+
+### 4. Tahapan Analisis
+
+Berikut adalah langkah-langkah dalam melakukan analisis klasterisasi:
+
+1.  **Load Data**: Membaca data dari Gold Layer dalam format Parquet atau melalui tabel Hive.
+2.  **Preprocessing**:
+    * Normalisasi fitur numerik seperti `total_kwh` dan `temperature` menggunakan MinMaxScaler.
+    * Encoding fitur kategorikal (jika ada).
+    * Penanganan *missing/null values* menggunakan `na.fill()` atau strategi imputasi lainnya.
+3.  **Modeling**: Melatih model menggunakan algoritma KMeans.
+4.  **Evaluasi**: Mengevaluasi kualitas klaster menggunakan **Silhouette Score**.
+5.  **Saving Model**: Model yang telah dilatih dapat disimpan ke direktori `/models/kmeans_cluster/` untuk penggunaan ulang (*reuse*) dan *deployment*.
+6.  **Inference**: Hasil klasterisasi disimpan kembali ke dalam Gold Layer dan diregistrasi sebagai tabel Hive untuk visualisasi dan query lanjutan.
 
 ___
 ## 📊 Visualisasi
