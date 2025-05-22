@@ -28,7 +28,8 @@ Proyek ini mengadopsi arsitektur **Medallion Architecture (Bronze – Silver –
 ### ⚙️ Orkestrasi & Monitoring
 - **Apache Airflow:** Menjadwalkan dan menjalankan pipeline ingestion hingga analitik.
 - **Apache Ambari:** Monitoring performa cluster Hadoop dan job Spark.
-
+  
+___
 ### 🔄 Alur Data Sistem
 
 1. **Ambil Data (Bronze):**  
