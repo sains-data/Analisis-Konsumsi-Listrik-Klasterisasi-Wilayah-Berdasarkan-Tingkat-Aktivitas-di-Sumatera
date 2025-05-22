@@ -74,8 +74,16 @@ ___
 | 11  | **Hive CLI**         | Query Interface        | Menjalankan query HiveQL dari terminal                                      |
 
 ___
-## 🧩Struktur Folder
+## 🧩Struktur Folder HDFS
 
+Representasi dari organisasi data di dalam cluster Hadoop, mengikuti **Medallion Architecture** (Bronze, Silver, Gold Layers). Ini memastikan data disimpan secara terstruktur pada setiap tahap transformasi.
+
+| Layer                               | Path HDFS                           | Format               | Tujuan                                                                                     |
+| :---------------------------------- | :---------------------------------- | :------------------- | :----------------------------------------------------------------------------------------- |
+| **Bronze Layer** (Raw Data)         | `/data/bronze/` [cite: 82, 201, 320] | CSV, JSON [cite: 82, 201, 320]     | Arsip permanen data mentah dari sumber eksternal tanpa perubahan.                  |
+| **Silver Layer** (Cleaned Data)     | `/data/silver/` [cite: 82, 201, 320] | Parquet [cite: 82, 201, 320]    | Data terstruktur, bersih, dan efisien dalam penyimpanan, siap dianalisis.        |
+| **Gold Layer** (Analytics-Ready)    | `/data/gold/` [cite: 82, 201, 320]  | Parquet, ORC [cite: 65, 82, 184, 201, 320] | Untuk kebutuhan laporan, query cepat, dan visualisasi ke end-user. |
+| **Temp Layer** (Temporary files)    | `/data/tmp/` [cite: 82, 201, 320]   | (N/A)                | Digunakan untuk file sementara selama proses ETL.                    |
 
 ___
 ## 📂 Dataset
