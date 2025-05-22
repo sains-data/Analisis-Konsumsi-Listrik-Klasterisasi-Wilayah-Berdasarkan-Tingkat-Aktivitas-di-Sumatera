@@ -75,7 +75,6 @@ ___
 
 ___
 ## 🧩Struktur Folder HDFS
-
 Representasi dari organisasi data di dalam cluster Hadoop, mengikuti **Medallion Architecture** (Bronze, Silver, Gold Layers). Ini memastikan data disimpan secara terstruktur pada setiap tahap transformasi.
 
 | Layer                               | Path HDFS                           | Format               | Tujuan                                                                                     |
@@ -87,7 +86,52 @@ Representasi dari organisasi data di dalam cluster Hadoop, mengikuti **Medallion
 
 ___
 ## 📂 Dataset
+### 1. Atribut Data Konsumsi Listrik (Data Smart Meter)
 
+Data ini merupakan inti dari analisis, memberikan detail penggunaan listrik dari setiap smart meter. 
+
+| Atribut             | Tipe Data  | Deskripsi                                                                 |
+| :------------------ | :--------- | :------------------------------------------------------------------------ |
+| `timestamp`         | `datetime` | Waktu pengambilan data (biasanya dalam interval per 15 menit atau per jam). |
+| `meter_id`          | `string`   | ID unik untuk setiap smart meter.                                   |
+| `region`            | `string`   | Wilayah (misalnya: Kota, Kabupaten, Provinsi di Sumatera).    |
+| `voltage`           | `float`    | Tegangan listrik dalam volt.                                 |
+| `current`           | `float`    | Arus listrik dalam ampere.                                   |
+| `power_consumption` | `float`    | Konsumsi daya aktif (kWh) selama interval waktu tersebut.      |
+| `power_factor`      | `float`    | Faktor daya (antara 0 dan 1).                                 |
+| `outage_flag`       | `boolean`  | Apakah ada pemadaman listrik saat itu (True atau False).      |
+
+### 2. Atribut Data Cuaca (BMKG API/Simulasi)
+
+Informasi cuaca digunakan untuk menganalisis korelasinya dengan pola konsumsi listrik.
+
+| Atribut             | Tipe Data | Deskripsi                               |
+| :------------------ | :-------- | :-------------------------------------- |
+| `temperature`       | `float`   | Suhu udara (°C).             |
+| `humidity`          | `float`   | Kelembaban relatif (%).     |
+| `rainfall`          | `float`   | Curah hujan (mm).           |
+| `weather_condition` | `string`  | Deskripsi cuaca (contoh: "Hujan ringan", "Berawan", "Cerah"). |
+| `wind_speed`        | `float`   | Kecepatan angin ($km/jam$). |
+
+### 3. Atribut Data Demografi & Sosial Ekonomi (BPS)
+
+Data demografi dan sosial ekonomi memberikan konteks tambahan untuk memahami karakteristik wilayah.
+
+| Atribut              | Tipe Data | Deskripsi                               |
+| :------------------- | :-------- | :-------------------------------------- |
+| `population_density` | `float`   | Kepadatan penduduk $(jiwa/km^{2})$. |
+| `urbanization_level` | `string`  | Tingkat urbanisasi (contoh: "Perkotaan", "Pedesaan"). |
+| `average_income`     | `float`   | Pendapatan rata-rata per kapita (Rp). |
+| `economic_activity`  | `string`  | Dominasi sektor ekonomi (contoh: "Industri", "Pertanian", "Jasa"). |
+| `household_size`     | `float`   | Rata-rata jumlah anggota rumah tangga. |
+
+### 4. Format Penyimpanan Data di HDFS
+
+Data akan disimpan dalam format yang berbeda di setiap lapisan Medallion Architecture di HDFS untuk optimasi dan efisiensi.
+
+* **Bronze Layer**: (Raw) CSV/JSON di `/data/bronze/konsumsi/2025-01.csv`
+* **Silver Layer**: (Cleaned) Parquet di `/data/silver/konsumsi/2025.parquet`
+* **Gold Layer**: (Aggregated) ORC/Parquet di `/data/gold/klasterisasi/summary_cluster.parquet`
 
 ___
 ## ⚙️ Proses ETL
