@@ -205,7 +205,7 @@ Dalam proyek ini, fokus utama analitik adalah **Segmentasi Wilayah** menggunakan
 
 | No  | Analisis          | Algoritma Spark MLlib | Tujuan                                                |
 | :-- | :---------------- | :-------------------- | :---------------------------------------------------- |
-| 2   | Segmentasi wilayah | KMeans Clustering     | Mengelompokkan wilayah berdasarkan kesamaan pola konsumsi listrik. |
+| 1   | Segmentasi wilayah | KMeans Clustering     | Mengelompokkan wilayah berdasarkan kesamaan pola konsumsi listrik. |
 
 ### 4. Tahapan Analisis
 
