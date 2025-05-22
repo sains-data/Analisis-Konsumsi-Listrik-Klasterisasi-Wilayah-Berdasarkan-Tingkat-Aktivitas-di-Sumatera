@@ -8,6 +8,7 @@ ___
 ## 🏗️ Arsitektur Sistem
 
 Proyek ini mengadopsi arsitektur **Medallion Architecture (Bronze – Silver – Gold)** dan menggunakan berbagai komponen dalam ekosistem Apache Hadoop. Alur sistem dirancang untuk melakukan ingestion, pembersihan, transformasi, klasterisasi, dan visualisasi data secara batch
+<img src="https://github.com/user-attachments/assets/b34ae450-82c1-4fbf-84b6-2a44837cab26" alt="description of image">
 
 ### 🔰 Bronze Layer (Raw Data)
 - **Sumber data:** Smart Meter, API Cuaca (BMKG), dan data Demografi (BPS).
