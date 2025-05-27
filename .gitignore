@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Docker volumes dan cache
+docker-volumes/
+hadoop_namenode/
+hadoop_datanode/
+superset_db/
+superset_home/
+minio_data/
+
+# Dataset folder (git submodule)
+Dataset/
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Besar files
+*.tar
+*.gz
+*.zip
