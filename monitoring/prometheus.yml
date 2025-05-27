@@ -1,0 +1,44 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'spark-master'
+    static_configs:
+      - targets: ['spark-master:8080']
+
+  - job_name: 'spark-worker-1'
+    static_configs:
+      - targets: ['spark-worker-1:8081']
+
+  - job_name: 'spark-worker-2'
+    static_configs:
+      - targets: ['spark-worker-2:8082']
+
+  - job_name: 'namenode'
+    static_configs:
+      - targets: ['namenode:9870']
+
+  - job_name: 'datanode'
+    static_configs:
+      - targets: ['datanode:9864']
+
+  - job_name: 'hive-server'
+    static_configs:
+      - targets: ['hive-server:10000']
+
+  - job_name: 'superset'
+    static_configs:
+      - targets: ['superset:8088']
+
+  - job_name: 'jupyter'
+    static_configs:
+      - targets: ['jupyter:8888']
