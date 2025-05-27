@@ -135,8 +135,10 @@ Dataset berisi data konsumsi listrik sintesis yang mencakup:
 
 ## 👥 Kontributor
 
-- [Your Name](https://github.com/yourusername)
-- [Team Member](https://github.com/teammember)
+1. Meira Listyaningrum 122450011
+2. Ahmad Sahidin Akbar 122450044
+3. Salwa Farhanatussaidah 122450055
+4. Kayla Amanda Sukma 122450086
 
 ## 📄 Lisensi
 
