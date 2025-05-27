@@ -19,10 +19,9 @@ Proyek ini menganalisis konsumsi listrik dan mengklasterisasi wilayah di Sumater
 
 ## 🏗️ Arsitektur
 
+![Architecture Diagram](https://github.com/sains-data/Analisis-Konsumsi-Listrik-Klasterisasi-Wilayah-Berdasarkan-Tingkat-Aktivitas-di-Sumatera/blob/main/Gambar%20Arsitektur%20Kel%2017.png)
+
 Proyek ini mengimplementasikan arsitektur **Medalion (Bronze-Silver-Gold)** untuk data lake:
-
-![Architecture Diagram](https://miro.medium.com/v2/resize:fit:1400/1*MoqE1BTBku4_XRwlLpQw6A.png)
-
 ### Bronze Layer (Raw Data)
 - **Lokasi**: `hdfs://namenode:9000/electricity/bronze/`
 - **Format**: CSV/Parquet
